@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
@@ -14,12 +14,20 @@ import { useHomepageGamesQuery } from '../redux/slices/async/usersApiSlice';
 const len = Object.keys(covers).length;
 
 
-const Home = () => {
+const HomePage = () => {
   const navigate = useNavigate();
 
   const [currentImage, setCurrentImage] = useState(0);
 
   const { data: homepageGamesData, isLoading: homepageGamesLoading, error: homepageGamesErr } = useHomepageGamesQuery();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage(prev => (prev + 1) % len);
+    }, 3500);
+
+    return () => clearInterval(interval);
+  }, [len]);
 
   const handleNext = () => {
     if (currentImage < len - 1)
@@ -58,10 +66,10 @@ const Home = () => {
                       </div>
 
                       <div className='absolute top-0 w-full h-full hidden items-center justify-between px-4 group-hover:lg:flex'>
-                        <button onClick={handlePrev} className='bg-white p-1 rounded-full text-xl z-10 text-black'>
+                        <button onClick={handlePrev} className='bg-white p-1 rounded-full text-xl z-100 text-black'>
                           <FaAngleLeft />
                         </button>
-                        <button onClick={handleNext} className='bg-white p-1 rounded-full text-xl z-10 text-black'>
+                        <button onClick={handleNext} className='bg-white p-1 rounded-full text-xl z-100 text-black'>
                           <FaAngleRight />
                         </button>
                       </div>
@@ -109,4 +117,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

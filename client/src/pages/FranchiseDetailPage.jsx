@@ -26,7 +26,7 @@ const FranchiseDetailPage = () => {
                     franchiseDetailsLoading ? <Loading /> :
                         <>
                             <div>
-                                <div className='w-full h-[280px] relative hidden lg:block'>
+                                <div className='w-full h-[280px] relative lg:block'>
                                     <div className='w-full h-full'>
                                         <img src={gameCover} alt='game_cover' className='h-full w-full object-cover' />
                                     </div>
@@ -50,7 +50,7 @@ const FranchiseDetailPage = () => {
                                             <h2 className='text-xl lg:text-2xl font-bold mb-5' >This franchise has following series of games: </h2>
 
                                             <div className='relative'>
-                                                <div className='grid grid-cols-2 lg:grid-cols-4 gap-6 relative z-10'>
+                                                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10'>
                                                     {
                                                         franchiseDetailsData?.games?.map((game, index) => {
                                                             return (

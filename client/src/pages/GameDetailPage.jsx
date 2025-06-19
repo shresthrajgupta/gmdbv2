@@ -261,7 +261,7 @@ const GameDetailPage = () => {
                                             <h2 className='text-xl lg:text-2xl font-bold mb-5' >This game is part of the franchise</h2>
 
                                             <div className='relative'>
-                                                <div className='grid grid-cols-2 lg:grid-cols-5 gap-6 relative z-10'>
+                                                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 relative z-10'>
                                                     {
                                                         gameDetailsData?.franchises?.map((franchise, index) => {
                                                             return (
@@ -285,7 +285,7 @@ const GameDetailPage = () => {
                                             <h2 className='text-xl lg:text-2xl font-bold mb-5' >Similar Games</h2>
 
                                             <div className='relative'>
-                                                <div className='grid grid-cols-2 lg:grid-cols-5 gap-6 relative z-10'>
+                                                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 relative z-10'>
                                                     {
                                                         gameDetailsData?.similar_games?.map((game, index) => {
                                                             return (
