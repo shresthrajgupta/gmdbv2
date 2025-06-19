@@ -1,0 +1,45 @@
+{
+  "name": "gmdbv2",
+  "version": "1.0.0",
+  "description": "game library tracking application",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js",
+    "server": "nodemon server/index.js",
+    "client": "npm run dev --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "data:import": "node server/seeder.js -i",
+    "data:destroy": "node server/seeder.js -d",
+    "build": "npm install --include=dev && npm install --prefix client --include=dev && npm run build --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shresthrajgupta/gmdbv2.git"
+  },
+  "keywords": [],
+  "author": "Shresth Raj Gupta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shresthrajgupta/gmdbv2/issues"
+  },
+  "homepage": "https://github.com/shresthrajgupta/gmdbv2#readme",
+  "dependencies": {
+    "axios": "^1.10.0",
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.15.2",
+    "nodemailer": "^7.0.3"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "nodemon": "^3.1.10"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
