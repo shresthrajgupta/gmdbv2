@@ -15,6 +15,7 @@ const CompletedListPage = () => {
 
     const [pageNo, setPageNo] = useState(1);
     const [data, setData] = useState([]);
+    const [isDataEmpty, setIsDataEmpty] = useState(false);
 
     const [showCompletedList, { data: showCompletedListData, isFetching: showCompletedListFetching, isError: showCompletedListErr }] = useLazyShowCompletedListQuery();
 
@@ -46,8 +47,14 @@ const CompletedListPage = () => {
             try {
                 if (pageNo === 1) {
                     const res = await showCompletedList({ pageNo }).unwrap();
-                    setData([...res.finished]);
-                    totalPage.current = parseInt(res.totalPages);
+
+                    if (res.finished.length === 0) {
+                        setIsDataEmpty(true);
+                    } else {
+                        setData([...res.finished]);
+                        totalPage.current = parseInt(res.totalPages);
+                    }
+
                 } else {
                     if (pageNo <= totalPage.current) {
                         const res = await showCompletedList({ pageNo }).unwrap();
@@ -65,12 +72,20 @@ const CompletedListPage = () => {
     return (
         <>
             <Meta title='Completed List - GMDB' />
+
             {
                 showCompletedListErr ? <UnauthorizedPage /> :
                     <>
                         <div className='py-16'>
                             <div className='container mx-auto'>
                                 <h3 className='text-lg lg:text-3xl font-semibold my-5 px-5'>Your Completed List</h3>
+
+                                {
+                                    isDataEmpty &&
+                                    <div className='flex justify-center items-center mt-16'>
+                                        <h3 className='text-lg lg:text-3xl font-semibold my-5 px-5'>No completed game found</h3>
+                                    </div>
+                                }
 
                                 <div className='grid grid-cols-[repeat(auto-fit,230px)] gap-6 justify-center lg:justify-start'>
                                     {

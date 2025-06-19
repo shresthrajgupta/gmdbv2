@@ -435,12 +435,16 @@ const showPlaylist = asyncHandler(async (req, res) => {
         User.findById(userId).select('toPlay').lean().then(user => user?.toPlay?.length || 0)
     ]);
 
-    const totalCount = Math.ceil(gameCount / limit);
-
     if (!userPopulated) {
         res.status(404);
         throw new Error("User not found");
     }
+
+    if (gameCount === 0) {
+        return res.status(200).json({ _id: userPopulated._id, toPlay: [], totalPages: 1 });
+    }
+
+    const totalCount = Math.ceil(gameCount / limit);
 
     if (pageNo <= 0 || pageNo > totalCount) {
         res.status(404);
@@ -469,12 +473,16 @@ const showCompletedList = asyncHandler(async (req, res) => {
         User.findById(userId).select('finished').lean().then(user => user?.finished?.length || 0)
     ]);
 
-    const totalCount = Math.ceil(gameCount / limit);
-
     if (!userPopulated) {
         res.status(404);
         throw new Error("User not found");
     }
+
+    if (gameCount === 0) {
+        return res.status(200).json({ _id: userPopulated._id, finished: [], totalPages: 1 });
+    }
+
+    const totalCount = Math.ceil(gameCount / limit);
 
     if (pageNo <= 0 || pageNo > totalCount) {
         res.status(404);

@@ -63,7 +63,7 @@ const SignUpPage = () => {
         try {
             const res = await signup({ name, email, password }).unwrap();
 
-            if (res?.message === "OTP sent successfully") {
+            if (res === "OTP sent successfully") {
                 setShowOtp(true);
                 setHasUnsavedChanges(true);
             }
