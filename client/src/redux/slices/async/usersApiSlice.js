@@ -28,6 +28,14 @@ export const usersApiSlice = apiSlice.injectEndpoints({
             })
         }),
 
+        forgotPassword: builder.mutation({
+            query: ({ email, password }) => ({
+                url: "/api/users/forgotpassword",
+                method: 'POST',
+                body: { email, password }
+            })
+        }),
+
         homepageGames: builder.query({
             query: () => ({
                 url: "/api/users/homepagegames",
@@ -95,6 +103,7 @@ export const
         useSignupMutation,
         useVerifyOtpMutation,
         useLoginMutation,
+        useForgotPasswordMutation,
         useHomepageGamesQuery,
         useAddToPlaylistMutation,
         useDelFromPlaylistMutation,

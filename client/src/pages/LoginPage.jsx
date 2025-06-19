@@ -86,7 +86,7 @@ const LoginPage = () => {
                 </form>
             </div>
 
-            <div> <Link to="/forgot_password" className='hover:text-white'> Forgot Password? </Link> </div>
+            <div> <Link to="/forgotpassword" className='hover:text-white'> Forgot Password? </Link> </div>
             <div> <Link to="/signup" className='hover:text-white'> Don't have an account? </Link> </div>
         </div>
     )

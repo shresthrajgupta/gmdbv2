@@ -13,6 +13,7 @@ import PrivateRoute from './components/PrivateRoute.jsx';
 
 import LoginPage from './pages/LoginPage.jsx';
 import SignUpPage from './pages/SignupPage.jsx';
+import ForgotPasswordPage from './pages/ForgotPasswordPage.jsx';
 import HomePage from './pages/HomePage.jsx';
 import SearchPage from './pages/SearchPage.jsx';
 import GameDetailPage from './pages/GameDetailPage.jsx';
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
       <Route index={true} path='/' element={<LoginPage />} />
       <Route path='/login' element={<LoginPage />} />
       <Route path='/signup' element={<SignUpPage />} />
+      <Route path='/forgotpassword' element={<ForgotPasswordPage />} />
 
       <Route path='' element={<PrivateRoute />}>
         <Route path='/home' element={<HomePage />}></Route>

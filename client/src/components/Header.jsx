@@ -118,11 +118,12 @@ const Header = () => {
                   <Link to={"/about"}>About</Link>
                 </li>
 
-                <li className='px-4 py-2 hover:bg-neutral-600 cursor-pointer rounded'>
-                  <p onClick={() => {
-                    localStorage.removeItem("token");
-                    navigate('/login');
-                  }}>Logout</p>
+                <li className='px-4 py-2 hover:bg-neutral-600 cursor-pointer rounded'
+                  onClick={() => {
+                    localStorage.clear();
+                    window.location.reload();
+                  }}>
+                  <p>Logout</p>
                 </li>
               </ul>
             }

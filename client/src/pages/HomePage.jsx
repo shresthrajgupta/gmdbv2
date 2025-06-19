@@ -33,7 +33,7 @@ const Home = () => {
   };
 
   return (
-    homepageGamesErr || true ? <UnauthorizedPage /> :
+    homepageGamesErr ? <UnauthorizedPage /> :
       <>
         <div>
           <section className='w-full h-full'>

@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 import User from "../models/userModel.js";
-import Game from '../models/gameModel.js';
+import Game from '../models/gameModel.js'; // do not remove
 
 import asyncHandler from "../utils/asyncHandler.js";
 
@@ -110,7 +110,7 @@ const verifyOtp = asyncHandler(async (req, res) => {
             });
         }
 
-        const user = await User.findOne({ email: decoded.email }).lean();
+        const user = await User.findOne({ email: decoded.email }); // do not use lean if you want to use .save() later
 
         if (!user) {
             const newUser = new User({
@@ -130,7 +130,7 @@ const verifyOtp = asyncHandler(async (req, res) => {
             await user.save();
 
             res.clearCookie("jwt");
-            generateToken(res, { userId: newUser._id, purpose: "access" });
+            generateToken(res, { userId: user._id, purpose: "access" });
 
             return res.status(201).json({ _id: user._id, name: user.name, email: user.email, isAdmin: user.isAdmin });
         }
@@ -159,6 +159,51 @@ const login = asyncHandler(async (req, res) => {
     } else {
         res.status(401);
         throw new Error("Invalid email or password");
+    }
+});
+
+const forgotPassword = asyncHandler(async (req, res) => {
+    const { email, password } = req.body;
+
+    const user = await User.exists({ email });
+
+    if (!user) {
+        res.status(404);
+        throw new Error("User not found");
+    }
+
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    try {
+        await mailerGmail({
+            from: process.env.EMAIL_ID,
+            to: email,
+            subject: "OTP",
+            text: `Your OTP is ${otp}`,
+        });
+    } catch (err) {
+        if (runningEnv !== "production") {
+            console.error("forgotPassword", err);
+        }
+        res.status(500);
+        throw new Error("Failed to send OTP");
+    }
+
+    try {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+        const hashedOtp = await bcrypt.hash(`${otp}`, salt);
+
+        const payload = { email, hashedPassword, hashedOtp, attempts: 1 };
+        generateToken(res, { ...payload, purpose: "auth" });
+
+
+        return res.status(200).json("OTP sent successfully");
+    } catch (err) {
+        if (runningEnv !== "production") {
+            console.error("forgotPassword", err);
+        }
+        res.status(500);
+        throw new Error("Some error occured, please try again");
     }
 });
 
@@ -444,6 +489,7 @@ export {
     signup,
     verifyOtp,
     login,
+    forgotPassword,
     homepageGames,
     getProfile,
     addToPlaylist,
