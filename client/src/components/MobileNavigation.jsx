@@ -1,6 +1,7 @@
 import { MobileNav } from "../constants/Navigation";
 import { NavLink } from "react-router-dom";
 
+
 const MobileNavigation = () => {
     return (
         <section className='bg-black h-14 w-full fixed bottom-0 bg-opacity-60 backdrop-blur-sm lg:hidden z-40'>
@@ -23,7 +24,7 @@ const MobileNavigation = () => {
                 }
             </div>
         </section>
-    )
-}
+    );
+};
 
 export default MobileNavigation;

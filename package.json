@@ -10,8 +10,6 @@
     "server": "nodemon server/index.js",
     "client": "npm run dev --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "data:import": "node server/seeder.js -i",
-    "data:destroy": "node server/seeder.js -d",
     "build": "npm install --include=dev && npm install --prefix client --include=dev && npm run build --prefix client"
   },
   "repository": {

@@ -9,6 +9,7 @@ import { useForgotPasswordMutation, useVerifyOtpMutation } from '../redux/slices
 import { setCredentials } from '../redux/slices/sync/authSlice';
 
 import WarningReload from "../components/WarningReload";
+import Meta from '../components/Meta';
 
 
 const ForgotPasswordPage = () => {
@@ -90,6 +91,8 @@ const ForgotPasswordPage = () => {
 
     return (
         <>
+            <Meta title="Reset Password - GMDB" />
+
             <div className="flex flex-col items-center justify-center min-h-screen">
                 <div className="flex flex-col items-center px-6">
                     <img src={logo} alt='Logo' className="w-32" />

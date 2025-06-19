@@ -8,6 +8,7 @@ import logo from "../assets/logo.png";
 import { useLoginMutation } from '../redux/slices/async/usersApiSlice';
 import { setCredentials } from '../redux/slices/sync/authSlice';
 
+
 const LoginPage = () => {
     const navigate = useNavigate();
 
@@ -89,7 +90,7 @@ const LoginPage = () => {
             <div> <Link to="/forgotpassword" className='hover:text-white'> Forgot Password? </Link> </div>
             <div> <Link to="/signup" className='hover:text-white'> Don't have an account? </Link> </div>
         </div>
-    )
-}
+    );
+};
 
 export default LoginPage;

@@ -430,10 +430,12 @@ const showPlaylist = asyncHandler(async (req, res) => {
     const limit = 12;
     const skip = (pageNo - 1) * limit;
 
-    const [userPopulated, totalCount] = await Promise.all([
+    const [userPopulated, gameCount] = await Promise.all([
         User.findById(userId).select('toPlay').populate({ path: "toPlay", select: "name id guid poster url", options: { limit: limit, skip: skip } }).lean(),
         User.findById(userId).select('toPlay').lean().then(user => user?.toPlay?.length || 0)
     ]);
+
+    const totalCount = Math.ceil(gameCount / limit);
 
     if (!userPopulated) {
         res.status(404);
@@ -462,11 +464,12 @@ const showCompletedList = asyncHandler(async (req, res) => {
     const limit = 12;
     const skip = (pageNo - 1) * limit;
 
-    const [userPopulated, totalCount] = await Promise.all([
+    const [userPopulated, gameCount] = await Promise.all([
         User.findById(userId).select('finished').populate({ path: "finished", select: "name id guid poster url", options: { limit: limit, skip: skip } }).lean(),
         User.findById(userId).select('finished').lean().then(user => user?.finished?.length || 0)
     ]);
 
+    const totalCount = Math.ceil(gameCount / limit);
 
     if (!userPopulated) {
         res.status(404);

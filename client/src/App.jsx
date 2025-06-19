@@ -7,6 +7,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import MobileNavigation from './components/MobileNavigation';
 
+
 function App() {
   const location = useLocation();
   const isAuthPage = (location.pathname === '/' || location.pathname === '/login' || location.pathname === '/signup');
@@ -23,7 +24,7 @@ function App() {
       </main>
       <ToastContainer position="top-center" transition={Slide} hideProgressBar autoClose={1500} />
     </>
-  )
+  );
 };
 
 export default App;

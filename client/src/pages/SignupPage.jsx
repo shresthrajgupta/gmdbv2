@@ -34,41 +34,6 @@ const SignUpPage = () => {
     const handleSignupSubmit = async (e) => {
         e.preventDefault();
 
-        // if (showOtp) {
-        //     const otpError = validateOtp();
-        //     if (otpError) {
-        //         setServerError(otpError);
-        //         setDisabledBtn(false);
-        //         return;
-        //     }
-
-        //     try {
-        //         const response = await axios.post('/user/verify',
-        //             { otp: parseInt(otpData.otp) },
-        //             {
-        //                 headers: {
-        //                     'Content-Type': 'application/json',
-        //                     'Authorization': `Bearer ${localStorage.getItem('token')}`
-        //                 }
-        //             }
-        //         );
-
-        //         if (response.status === 200) {
-        //             localStorage.removeItem('token');
-        //             navigate('/login');
-        //         }
-        //         else {
-        //             setServerError('OTP mismatch');
-        //         }
-
-        //         setDisabledBtn(false);
-
-        //     } catch (error) {
-        //         setServerError(error?.response?.data?.error || 'An error occurred, please try again.');
-        //         setDisabledBtn(false);
-        //     }
-        // }
-
         if (!name || name.length < 5 || name.length > 15) {
             toast.error("Name must be between 5 to 15 characters");
             setIsError(true);

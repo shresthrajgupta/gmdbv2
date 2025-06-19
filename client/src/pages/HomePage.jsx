@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
 import covers from '../constants/cover';
@@ -15,6 +15,8 @@ const len = Object.keys(covers).length;
 
 
 const Home = () => {
+  const navigate = useNavigate();
+
   const [currentImage, setCurrentImage] = useState(0);
 
   const { data: homepageGamesData, isLoading: homepageGamesLoading, error: homepageGamesErr } = useHomepageGamesQuery();
@@ -69,10 +71,10 @@ const Home = () => {
                       <div className='container mx-auto'>
                         <div className='absolute bottom-0 max-w-md px-3'>
                           <h2 className='font-bold text-2xl lg:text-4xl text-white drop-shadow-2xl'>{name}</h2>
-                          <button className='bg-white px-3 py-2 text-black font-bold rounded mt-4 hover:bg-gradient-to-l from-red-700 to-orange-500 shadow-md transition-all'>
-                            <Link to={url}>
-                              Go to Game
-                            </Link>
+                          <button onClick={() => navigate(url)} className='bg-white px-3 py-2 text-black font-bold rounded mt-4 hover:bg-gradient-to-l from-red-700 to-orange-500 shadow-md transition-all'>
+
+                            Go to Game
+
                           </button>
                         </div>
                       </div>
@@ -90,7 +92,7 @@ const Home = () => {
                 {
                   homepageGamesData?.toPlay?.length > 0
                     ?
-                    <HorizontalScroll data={homepageGamesData?.toPlay} heading={"Your Playlist"} />
+                    <HorizontalScroll data={homepageGamesData?.toPlay} heading={"Continue Gaming"} />
                     :
                     <>
                       <div className='container mx-auto px-4'>

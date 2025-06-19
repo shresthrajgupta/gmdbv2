@@ -3,6 +3,7 @@ import Card from './Card';
 
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
+
 const HorizontalScroll = ({ data = [], heading }) => {
     const containerRef = useRef();
 
@@ -38,7 +39,7 @@ const HorizontalScroll = ({ data = [], heading }) => {
 
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default HorizontalScroll
+export default HorizontalScroll;

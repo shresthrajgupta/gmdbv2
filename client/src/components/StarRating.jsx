@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 
 import { useGetRatingQuery, useChangeRatingMutation } from '../redux/slices/async/ratingsApiSlice';
 
+
 const StarRating = ({ guid, gameId }) => {
     const [hovered, setHovered] = useState(null);
 
